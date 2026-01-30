@@ -1,0 +1,356 @@
+/* Reset y Variables */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #667eea;
+    --secondary: #764ba2;
+    --accent: #0ea5e9;
+    --dark: #1e293b;
+    --light: #f8fafc;
+    --text: #334155;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--light);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+    animation: fadeInUp 0.8s ease;
+}
+
+.hero-content h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    opacity: 0.95;
+    animation: fadeInUp 1s ease;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+    animation: fadeInUp 1.2s ease;
+}
+
+.cta {
+    display: inline-block;
+    background: white;
+    color: var(--primary);
+    padding: 18px 50px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    animation: fadeInUp 1.4s ease;
+}
+
+.cta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Proyectos Section */
+.proyectos {
+    max-width: 1200px;
+    margin: 100px auto;
+    padding: 0 20px;
+}
+
+.proyectos h2 {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 80px;
+    color: var(--dark);
+}
+
+.proyecto {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    padding: 40px;
+    margin-bottom: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.proyecto:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.proyecto:nth-child(odd) {
+    grid-template-columns: 1fr 1fr;
+}
+
+.proyecto:nth-child(even) {
+    grid-template-columns: 1fr 1fr;
+}
+
+.proyecto:nth-child(even) .proyecto-imagen {
+    order: 2;
+}
+
+.proyecto-imagen img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.proyecto-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--dark);
+}
+
+.proyecto-info > p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: var(--text);
+    line-height: 1.7;
+}
+
+.tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tech span {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.proyecto-features {
+    margin-bottom: 25px;
+}
+
+.proyecto-features p {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: var(--text);
+}
+
+.proyecto-links {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-demo, .btn-codigo {
+    padding: 12px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.btn-demo {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+}
+
+.btn-demo:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-codigo {
+    background: var(--light);
+    color: var(--dark);
+    border: 2px solid var(--dark);
+}
+
+.btn-codigo:hover {
+    background: var(--dark);
+    color: white;
+}
+
+/* Servicios */
+.servicios {
+    background: white;
+    padding: 100px 20px;
+}
+
+.servicios h2 {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 60px;
+    color: var(--dark);
+}
+
+.servicios-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.servicio {
+    text-align: center;
+    padding: 40px 30px;
+    background: var(--light);
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.servicio:hover {
+    transform: translateY(-10px);
+}
+
+.servicio-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.servicio h3 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    color: var(--dark);
+}
+
+.servicio p {
+    font-size: 1.05rem;
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* Contacto */
+.contacto {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.contacto h2 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+}
+
+.contacto > p {
+    font-size: 1.3rem;
+    margin-bottom: 50px;
+    opacity: 0.95;
+}
+
+.contacto-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.contacto-btn {
+    background: white;
+    color: var(--primary);
+    padding: 15px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.contacto-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Footer */
+footer {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+footer p {
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .proyectos h2, .servicios h2, .contacto h2 {
+        font-size: 2rem;
+    }
+    
+    .proyecto {
+        grid-template-columns: 1fr !important;
+        padding: 30px 20px;
+    }
+    
+    .proyecto:nth-child(even) .proyecto-imagen {
+        order: 0;
+    }
+    
+    .proyecto-links {
+        flex-direction: column;
+    }
+    
+    .btn-demo, .btn-codigo {
+        text-align: center;
+    }
+    
+    .contacto-links {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .contacto-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
