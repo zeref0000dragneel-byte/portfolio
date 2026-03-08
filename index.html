@@ -3,244 +3,959 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabriel Zeref - Desarrollador Web Full Stack</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>José Gabriel — Páginas web y sistemas para negocios</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --cream:   #f7f5f0;
+            --white:   #ffffff;
+            --ink:     #181818;
+            --ink-2:   #3a3a3a;
+            --muted:   #888;
+            --border:  #e2ddd6;
+            --green:   #1a5c3a;
+            --green-l: #e8f2ec;
+            --amber:   #c8860a;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 18px 5%;
+            background: rgba(247,245,240,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            transition: box-shadow 0.3s;
+        }
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem; font-weight: 700;
+            color: var(--ink); text-decoration: none;
+            letter-spacing: -0.3px;
+        }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-links a {
+            font-size: 0.9rem; font-weight: 500;
+            color: var(--muted); text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--ink); }
+        .nav-cta {
+            background: var(--green); color: var(--white);
+            padding: 10px 22px; border-radius: 6px;
+            font-size: 0.88rem; font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .nav-cta:hover { background: #144d30; transform: translateY(-1px); }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex; align-items: center;
+            padding: 100px 5% 60px;
+            position: relative; overflow: hidden;
+            background: var(--cream);
+        }
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image:
+                radial-gradient(circle at 10% 60%, rgba(26,92,58,0.06) 0%, transparent 45%),
+                radial-gradient(circle at 85% 15%, rgba(200,134,10,0.04) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        .hero::after {
+            content: '';
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 80px 80px;
+            opacity: 0.3;
+            mask-image: radial-gradient(ellipse 80% 80% at 30% 50%, black 10%, transparent 75%);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            max-width: 1320px; width: 100%; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 64px; align-items: center;
+            position: relative; z-index: 1;
+        }
+
+        /* LADO IZQUIERDO */
+        .hero-left { display: flex; flex-direction: column; }
+
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--green-l); color: var(--green);
+            padding: 7px 18px; border-radius: 50px;
+            font-size: 0.82rem; font-weight: 700;
+            letter-spacing: 0.3px; margin-bottom: 28px;
+            border: 1px solid rgba(26,92,58,0.15);
+            width: fit-content;
+            animation: fadeUp 0.5s ease both;
+        }
+        .hero-badge .dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: var(--green);
+            animation: blink 1.8s infinite;
+        }
+        @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.6rem, 5vw, 4rem);
+            font-weight: 800; line-height: 1.06;
+            letter-spacing: -1.5px; color: var(--ink);
+            margin-bottom: 20px;
+            animation: fadeUp 0.6s 0.1s ease both;
+        }
+        .hero h1 span {
+            color: var(--green);
+            font-style: italic;
+        }
+
+        .hero-sub {
+            font-size: 1.08rem; color: var(--ink-2);
+            margin-bottom: 36px;
+            line-height: 1.8; font-weight: 400;
+            animation: fadeUp 0.6s 0.2s ease both;
+        }
+
+        /* Social proof — industrias */
+        .hero-proof {
+            display: flex; align-items: center; gap: 10px;
+            flex-wrap: wrap; margin-bottom: 36px;
+            animation: fadeUp 0.6s 0.25s ease both;
+        }
+        .hero-proof-label {
+            font-size: 0.78rem; color: var(--muted); font-weight: 500;
+            white-space: nowrap;
+        }
+        .hero-proof-tags { display: flex; gap: 7px; flex-wrap: wrap; }
+        .hero-proof-tags span {
+            background: var(--white); border: 1px solid var(--border);
+            color: var(--ink-2); padding: 4px 12px; border-radius: 50px;
+            font-size: 0.78rem; font-weight: 600;
+        }
+
+        .hero-ctas {
+            display: flex; align-items: center;
+            gap: 12px; flex-wrap: wrap;
+            animation: fadeUp 0.6s 0.3s ease both;
+        }
+        .btn-primary {
+            background: var(--green); color: var(--white);
+            padding: 14px 28px; border-radius: 8px;
+            font-size: 0.97rem; font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s;
+            box-shadow: 0 4px 16px rgba(26,92,58,0.3);
+        }
+        .btn-primary:hover {
+            background: #144d30; transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(26,92,58,0.35);
+        }
+        .btn-secondary {
+            background: transparent; color: var(--ink);
+            padding: 14px 28px; border-radius: 8px;
+            border: 1.5px solid var(--border);
+            font-size: 0.97rem; font-weight: 600;
+            text-decoration: none; transition: all 0.25s;
+        }
+        .btn-secondary:hover {
+            border-color: var(--ink); transform: translateY(-2px);
+            background: rgba(0,0,0,0.02);
+        }
+
+        /* Stats — ahora debajo del CTA en columna izquierda */
+        .hero-stats {
+            display: flex;
+            border: 1px solid var(--border); border-radius: 12px;
+            background: var(--white);
+            overflow: hidden; margin-top: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            animation: fadeUp 0.6s 0.4s ease both;
+        }
+        .stat {
+            padding: 20px 0; flex: 1;
+            border-right: 1px solid var(--border);
+            text-align: center;
+        }
+        .stat:last-child { border-right: none; }
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem; font-weight: 800;
+            color: var(--ink); display: block;
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 0.73rem; color: var(--muted);
+            font-weight: 500; margin-top: 5px; display: block;
+        }
+
+        /* LADO DERECHO — mockup flotante */
+        .hero-right {
+            position: relative;
+            animation: fadeUp 0.7s 0.35s ease both;
+        }
+        /* Blob decorativo detrás del mockup */
+        .hero-right::before {
+            content: '';
+            position: absolute;
+            top: -40px; right: -30px; bottom: -40px; left: -20px;
+            background: radial-gradient(ellipse at 60% 40%, rgba(26,92,58,0.08) 0%, transparent 70%);
+            border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%;
+            pointer-events: none; z-index: 0;
+        }
+        .hero-mockup {
+            position: relative; z-index: 1;
+            filter: drop-shadow(0 32px 64px rgba(0,0,0,0.18));
+        }
+        /* Tarjeta flotante — "último proyecto" */
+        .hero-float-card {
+            position: absolute;
+            bottom: -16px; left: -28px; z-index: 2;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            display: flex; align-items: center; gap: 12px;
+            animation: floatCard 4s ease-in-out infinite;
+        }
+        @keyframes floatCard {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        .float-icon {
+            width: 36px; height: 36px; border-radius: 8px;
+            background: var(--green-l);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; flex-shrink: 0;
+        }
+        .float-text-top {
+            font-size: 0.78rem; font-weight: 700; color: var(--ink);
+            line-height: 1.2;
+        }
+        .float-text-sub {
+            font-size: 0.7rem; color: var(--muted); margin-top: 2px;
+        }
+        /* Segunda tarjeta flotante — tech stack */
+        .hero-float-card-2 {
+            position: absolute;
+            top: 16px; right: -20px; z-index: 2;
+            background: var(--ink);
+            border-radius: 10px;
+            padding: 10px 14px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            animation: floatCard 4s 2s ease-in-out infinite;
+        }
+        .float-stack {
+            display: flex; gap: 6px; align-items: center;
+        }
+        .float-stack span {
+            font-size: 0.72rem; font-weight: 700;
+            color: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.1);
+            padding: 3px 8px; border-radius: 4px;
+        }
+
+        /* ── PROYECTOS ── */
+        .proyectos {
+            padding: 100px 5%;
+            max-width: 1320px; margin: 0 auto;
+        }
+        .section-eyebrow {
+            font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 2.5px; text-transform: uppercase;
+            color: var(--green); margin-bottom: 10px;
+            display: block;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 800; letter-spacing: -1px;
+            color: var(--ink); margin-bottom: 60px;
+            line-height: 1.1;
+        }
+
+        .proyecto {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 56px 52px;
+            margin-bottom: 32px;
+            display: grid;
+            grid-template-columns: 55% 1fr;
+            gap: 60px;
+            align-items: center;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+        .proyecto:hover {
+            box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+            transform: translateY(-3px);
+        }
+        .proyecto.reverse { direction: rtl; }
+        .proyecto.reverse > * { direction: ltr; }
+
+        /* Marco de laptop CSS puro */
+        .proyecto-imagen {
+            position: relative;
+        }
+        .laptop-frame {
+            position: relative;
+            background: #1a1a1a;
+            border-radius: 12px 12px 0 0;
+            padding: 8px 8px 0;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        .laptop-frame::before {
+            content: '';
+            display: block;
+            height: 8px;
+            background: #2a2a2a;
+            border-radius: 6px 6px 0 0;
+            margin-bottom: 6px;
+            background-image: radial-gradient(circle at 50% 50%, #444 3px, transparent 3px);
+            background-size: 100% 100%;
+            background-position: center;
+        }
+        .laptop-screen {
+            background: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+            aspect-ratio: 16 / 10;
+            line-height: 0;
+        }
+        .laptop-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            transition: transform 0.6s ease;
+        }
+        .proyecto:hover .laptop-screen img {
+            transform: scale(1.02);
+        }
+        .laptop-base {
+            background: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+            height: 18px; border-radius: 0 0 4px 4px;
+            position: relative;
+        }
+        .laptop-base::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 40%; height: 6px;
+            background: #111;
+            border-radius: 0 0 6px 6px;
+        }
+        .laptop-stand {
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(to bottom, #333, #222);
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .proyecto-info { display: flex; flex-direction: column; gap: 0; }
+
+        .proyecto-tipo {
+            font-size: 0.73rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            color: var(--green); margin-bottom: 12px;
+        }
+        .proyecto-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem; font-weight: 700;
+            letter-spacing: -0.5px; color: var(--ink);
+            margin-bottom: 14px; line-height: 1.25;
+        }
+        .proyecto-info > p {
+            font-size: 0.97rem; color: var(--ink-2);
+            line-height: 1.8; margin-bottom: 22px;
+        }
+        .tech {
+            display: flex; flex-wrap: wrap; gap: 7px;
+            margin-bottom: 22px;
+        }
+        .tech span {
+            background: var(--cream);
+            border: 1px solid var(--border);
+            color: var(--ink-2);
+            padding: 5px 14px; border-radius: 5px;
+            font-size: 0.78rem; font-weight: 600;
+        }
+        .proyecto-features { margin-bottom: 30px; }
+        .proyecto-features p {
+            font-size: 0.93rem; color: var(--ink-2);
+            padding: 7px 0;
+            display: flex; align-items: center; gap: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        .proyecto-features p:last-child { border-bottom: none; }
+        .proyecto-features p::before {
+            content: '✓';
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 22px; height: 22px; border-radius: 50%;
+            background: var(--green-l); color: var(--green);
+            font-size: 0.72rem; font-weight: 800;
+            flex-shrink: 0;
+        }
+        .proyecto-features p { text-indent: 0; }
+
+        .proyecto-links { display: flex; gap: 12px; }
+        .btn-demo {
+            background: var(--ink); color: var(--white);
+            padding: 11px 26px; border-radius: 7px;
+            font-size: 0.9rem; font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-flex; align-items: center; gap: 7px;
+        }
+        .btn-demo:hover {
+            background: var(--green); transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(26,92,58,0.25);
+        }
+
+        /* ── SERVICIOS ── */
+        .servicios {
+            background: var(--ink);
+            padding: 100px 5%;
+        }
+        .servicios-inner { max-width: 1320px; margin: 0 auto; }
+        .servicios .section-eyebrow { color: rgba(255,255,255,0.35); }
+        .servicios .section-title { color: var(--white); margin-bottom: 56px; }
+
+        .servicios-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 1px; background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px; overflow: hidden;
+        }
+        .servicio {
+            background: var(--ink);
+            padding: 44px 36px;
+            transition: background 0.3s;
+        }
+        .servicio:hover { background: #222; }
+        .servicio-icon { font-size: 2.2rem; margin-bottom: 20px; display: block; }
+        .servicio h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem; font-weight: 700;
+            color: var(--white); margin-bottom: 10px;
+        }
+        .servicio p {
+            font-size: 0.93rem; color: rgba(255,255,255,0.5);
+            line-height: 1.7; margin-bottom: 20px;
+        }
+        .servicio-precio {
+            display: block;
+            font-size: 1rem; font-weight: 700; color: var(--white);
+        }
+        .servicio-precio .desde { color: rgba(255,255,255,0.4); font-size: 0.78rem; font-weight: 500; }
+        .servicio-tiempo {
+            display: block;
+            font-size: 0.8rem; color: rgba(255,255,255,0.35);
+            margin-top: 4px;
+        }
+
+        /* ── PROCESO (nuevo — clave para cliente local) ── */
+        .proceso {
+            padding: 100px 5%;
+            max-width: 1320px; margin: 0 auto;
+        }
+        .proceso-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+            border: 1px solid var(--border); border-radius: 16px;
+            overflow: hidden; background: var(--white);
+        }
+        .paso {
+            padding: 40px 32px;
+            border-right: 1px solid var(--border);
+            position: relative;
+            transition: background 0.3s;
+        }
+        .paso:last-child { border-right: none; }
+        .paso:hover { background: var(--cream); }
+        .paso-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem; font-weight: 800;
+            color: var(--border); line-height: 1;
+            margin-bottom: 16px; display: block;
+        }
+        .paso h4 {
+            font-size: 1rem; font-weight: 700;
+            color: var(--ink); margin-bottom: 8px;
+        }
+        .paso p {
+            font-size: 0.88rem; color: var(--muted);
+            line-height: 1.65;
+        }
+
+        /* ── CONTACTO ── */
+        .contacto {
+            background: var(--green);
+            padding: 100px 5%;
+        }
+        .contacto-inner {
+            max-width: 1320px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 80px; align-items: center;
+        }
+        .contacto-left h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800; color: var(--white);
+            letter-spacing: -1px; line-height: 1.1;
+            margin-bottom: 16px;
+        }
+        .contacto-left p {
+            font-size: 1.05rem; color: rgba(255,255,255,0.7);
+            line-height: 1.75;
+        }
+        .contacto-links { display: flex; flex-direction: column; gap: 12px; }
+        .contacto-link {
+            display: flex; align-items: center; gap: 16px;
+            padding: 18px 22px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            text-decoration: none; color: var(--white);
+            transition: all 0.25s;
+        }
+        .contacto-link:hover {
+            background: rgba(255,255,255,0.18);
+            transform: translateX(4px);
+        }
+        .contacto-link-icon { font-size: 1.25rem; }
+        .contacto-link-texto { font-weight: 600; font-size: 0.95rem; }
+        .contacto-link-sub { font-size: 0.78rem; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--ink);
+            padding: 28px 5%;
+            display: flex; align-items: center;
+            justify-content: space-between; flex-wrap: wrap; gap: 12px;
+        }
+        footer p { font-size: 0.85rem; color: #555; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a {
+            font-size: 0.85rem; color: #555;
+            text-decoration: none; transition: color 0.2s;
+        }
+        .footer-links a:hover { color: #fff; }
+
+        /* ── ANIMACIONES ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .reveal {
+            opacity: 1; transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .js-loaded .reveal {
+            opacity: 0; transform: translateY(28px);
+        }
+        .js-loaded .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1000px) {
+            .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+            .hero-right { display: none; }
+            .hero h1 { font-size: clamp(2.6rem, 8vw, 3.8rem); }
+        }
+        @media (max-width: 900px) {
+            nav { padding: 16px 5%; }
+            .nav-links { display: none; }
+            .hero { padding: 100px 5% 60px; }
+            .hero-stats { flex-direction: column; width: 100%; }
+            .stat { border-right: none; border-bottom: 1px solid var(--border); }
+            .stat:last-child { border-bottom: none; }
+            .proyectos { padding: 80px 5%; }
+            .proyecto, .proyecto.reverse {
+                grid-template-columns: 1fr;
+                direction: ltr; padding: 32px 28px;
+            }
+            .servicios-grid { grid-template-columns: 1fr; }
+            .proceso-grid { grid-template-columns: 1fr 1fr; }
+            .contacto-inner { grid-template-columns: 1fr; gap: 40px; }
+            footer { flex-direction: column; align-items: flex-start; }
+        }
+        @media (max-width: 560px) {
+            .proceso-grid { grid-template-columns: 1fr; }
+            .paso { border-right: none; border-bottom: 1px solid var(--border); }
+            .hero-proof-tags { gap: 5px; }
+            .hero-proof-tags span { font-size: 0.72rem; padding: 3px 9px; }
+        }
+    </style>
 </head>
 <body>
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-badge">🚀 Disponible para proyectos</div>
-            <h1>Hola, soy José Gabriel</h1>
-            <h2>Desarrollador Web Full Stack</h2>
-            <p class="hero-description">Transformo ideas en soluciones web funcionales y rentables.<br>Especializado en React, Next.js y aplicaciones modernas.</p>
-            
+
+<!-- NAV -->
+<nav id="nav">
+    <a href="#" class="nav-logo">José Gabriel</a>
+    <ul class="nav-links">
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#proceso">Proceso</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <a href="https://wa.me/529516394080?text=Hola%20Gabriel%2C%20vi%20tu%20portafolio%20y%20quisiera%20platicar%20sobre%20mi%20proyecto" target="_blank" class="nav-cta">Contáctame →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-inner">
+        <!-- IZQUIERDA -->
+        <div class="hero-left">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                Disponible para nuevos proyectos
+            </div>
+            <h1>Páginas web y<br>sistemas para<br><span>tu negocio</span></h1>
+            <p class="hero-sub">¿Necesitas página web, tienda online o sistema para tu negocio? Te entrego en 7–14 días, con soporte incluido y resultados reales.</p>
+
+            <div class="hero-proof">
+                <span class="hero-proof-label">Proyectos para:</span>
+                <div class="hero-proof-tags">
+                    <span>🍽 Restaurantes</span>
+                    <span>🛍 Tiendas</span>
+                    <span>💼 Negocios locales</span>
+                    <span>🌿 Emprendedores</span>
+                </div>
+            </div>
+
+            <div class="hero-ctas">
+                <a href="#proyectos" class="btn-primary">Ver mi trabajo →</a>
+                <a href="#contacto" class="btn-secondary">Solicitar cotización</a>
+            </div>
+
             <div class="hero-stats">
                 <div class="stat">
-                    <div class="stat-number">6+</div>
-                    <div class="stat-label">Proyectos Completados</div>
+                    <span class="stat-number">8+</span>
+                    <span class="stat-label">Proyectos entregados</span>
                 </div>
                 <div class="stat">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Responsive Design</div>
+                    <span class="stat-number">7–14</span>
+                    <span class="stat-label">Días de entrega</span>
                 </div>
                 <div class="stat">
-                    <div class="stat-number">24h</div>
-                    <div class="stat-label">Tiempo de Respuesta</div>
+                    <span class="stat-number">24h</span>
+                    <span class="stat-label">Tiempo de respuesta</span>
                 </div>
             </div>
-            
-            <div class="hero-ctas">
-                <a href="#proyectos" class="cta-primary">Ver Proyectos</a>
-                <a href="#contacto" class="cta-secondary">Contactar</a>
-            </div>
-            
-            <div class="hero-tech">
-                <span>React</span>
-                <span>Next.js</span>
-                <span>TypeScript</span>
-                <span>Tailwind</span>
-                <span>Node.js</span>
-            </div>
         </div>
-    </section>
 
-    <section id="proyectos" class="proyectos">
-        <h2>💼 Proyectos Destacados</h2>
-        
-        <div class="proyecto">
-            <div class="proyecto-imagen">
-                <img src="ecommerce-preview.png" alt="Ecommerce Premium">
-            </div>
-            <div class="proyecto-info">
-                <h3>🛒 Ecommerce Premium con Panel Admin</h3>
-                <p>Plataforma completa de comercio electrónico con gestión de productos, categorías, pedidos y clientes en tiempo real.</p>
-                <div class="tech">
+        <!-- DERECHA — mockup flotante -->
+        <div class="hero-right">
+            <!-- Tarjeta flotante superior derecha -->
+            <div class="hero-float-card-2">
+                <div class="float-stack">
                     <span>Next.js</span>
                     <span>React</span>
-                    <span>TypeScript</span>
-                    <span>Tailwind CSS</span>
+                    <span>Firebase</span>
                 </div>
-                <div class="proyecto-features">
-                    <p>✅ Panel de administración completo</p>
-                    <p>✅ Gestión de productos y categorías</p>
-                    <p>✅ Sistema de pedidos en tiempo real</p>
-                    <p>✅ 100% responsive</p>
+            </div>
+
+            <!-- Mockup laptop -->
+            <div class="hero-mockup">
+                <div class="laptop-frame">
+                    <div class="laptop-screen">
+                        <img src="colmena-preview.png" alt="Amor de Colmena – proyecto destacado">
+                    </div>
                 </div>
-                <div class="proyecto-links">
-                    <a href="https://nova-ecommerce-gamma.vercel.app/" target="_blank" class="btn-demo">🔗 Ver Demo</a>
-                    <a href="https://github.com/zeref0000dragneel-byte/nova-ecommerce" target="_blank" class="btn-codigo">💻 Código</a>
+                <div class="laptop-base"></div>
+                <div class="laptop-stand"></div>
+            </div>
+
+            <!-- Tarjeta flotante inferior izquierda -->
+            <div class="hero-float-card">
+                <div class="float-icon">🛒</div>
+                <div>
+                    <p class="float-text-top">Amor de Colmena</p>
+                    <p class="float-text-sub">Tienda online con pagos reales</p>
                 </div>
             </div>
         </div>
+    </div>
+</section>
 
-        <div class="proyecto">
-            <div class="proyecto-imagen">
-                <img src="contabilidad-preview.png" alt="App Contabilidad">
+<!-- PROYECTOS -->
+<section id="proyectos" class="proyectos">
+    <span class="section-eyebrow reveal">Trabajo reciente</span>
+    <h2 class="section-title reveal">Proyectos reales,<br>resultados reales</h2>
+
+    <!-- 1. AMOR DE COLMENA -->
+    <div class="proyecto reveal">
+        <div class="proyecto-imagen">
+            <div class="laptop-frame">
+                <div class="laptop-screen">
+                    <img src="colmena-preview.png" alt="Amor de Colmena – Tienda Online">
+                </div>
             </div>
-            <div class="proyecto-info">
-                <h3>📊 Sistema de Contabilidad Personal</h3>
-                <p>Aplicación PWA para gestionar finanzas personales o de pequeños negocios con gráficos interactivos y almacenamiento local.</p>
-                <div class="tech">
-                    <span>HTML5</span>
-                    <span>CSS3</span>
-                    <span>JavaScript</span>
-                    <span>IndexedDB</span>
-                    <span>PWA</span>
-                </div>
-                <div class="proyecto-features">
-                    <p>✅ Registro de ventas y gastos</p>
-                    <p>✅ Reportes con gráficos Chart.js</p>
-                    <p>✅ Funciona sin internet (PWA)</p>
-                    <p>✅ Diseño moderno y responsive</p>
-                </div>
-                <div class="proyecto-links">
-                    <a href="https://contabilidad-app-omega.vercel.app" target="_blank" class="btn-demo">🔗 Ver Demo</a>
-                    <a href="https://github.com/zeref0000dragneel-byte/contabilidad-app" target="_blank" class="btn-codigo">💻 Código</a>
-                </div>
+            <div class="laptop-base"></div>
+            <div class="laptop-stand"></div>
+        </div>
+        <div class="proyecto-info">
+            <p class="proyecto-tipo">Tienda online</p>
+            <h3>Amor de Colmena — Tienda con pagos reales</h3>
+            <p>Tienda completa para productos apícolas de Oaxaca. El cliente entra, escoge, paga y recibe confirmación automática. Sin intermediarios.</p>
+            <div class="tech">
+                <span>Next.js 15</span><span>TypeScript</span>
+                <span>PostgreSQL</span><span>MercadoPago</span><span>Stripe</span>
+            </div>
+            <div class="proyecto-features">
+                <p>Carrito y checkout completo en 3 pasos</p>
+                <p>Acepta tarjeta, SPEI, OXXO y tarjeta internacional</p>
+                <p>Panel para administrar productos y pedidos</p>
+                <p>Disponible en español e inglés</p>
+            </div>
+            <div class="proyecto-links">
+                <a href="https://amor-de-colmena.vercel.app/" target="_blank" class="btn-demo">Ver demo →</a>
             </div>
         </div>
+    </div>
 
-        <div class="proyecto">
-            <div class="proyecto-imagen">
-                <img src="restaurant-preview.png" alt="Aurum Restaurant">
+    <!-- 2. RESTAURANTE PRO -->
+    <div class="proyecto reverse reveal">
+        <div class="proyecto-imagen">
+            <div class="laptop-frame">
+                <div class="laptop-screen">
+                    <img src="restaurante-preview.png" alt="Restaurante Pro – Sistema de Gestión">
+                </div>
             </div>
-            <div class="proyecto-info">
-                <h3>🍽️ Aurum Fine Dining - Restaurante Premium</h3>
-                <p>Landing page elegante para restaurante gourmet con sistema de reservas, galería interactiva y menú digital.</p>
-                <div class="tech">
-                    <span>Next.js</span>
-                    <span>React</span>
-                    <span>Tailwind CSS</span>
-                    <span>Framer Motion</span>
-                </div>
-                <div class="proyecto-features">
-                    <p>✅ Diseño premium con animaciones</p>
-                    <p>✅ Sistema de reservas integrado</p>
-                    <p>✅ Galería de platos interactiva</p>
-                    <p>✅ Optimizado para SEO</p>
-                </div>
-                <div class="proyecto-links">
-                    <a href="https://restaurant-landing-page-neon-xi.vercel.app/" target="_blank" class="btn-demo">🔗 Ver Demo</a>
-                    <a href="https://github.com/zeref0000dragneel-byte/Restaurant-landing-page" target="_blank" class="btn-codigo">💻 Código</a>
-                </div>
+            <div class="laptop-base"></div>
+            <div class="laptop-stand"></div>
+        </div>
+        <div class="proyecto-info">
+            <p class="proyecto-tipo">Sistema de gestión</p>
+            <h3>Restaurante Pro — Control de tu negocio desde el celular</h3>
+            <p>Sistema para restaurantes donde el admin ve ventas, gastos y ganancias en tiempo real, y los meseros toman pedidos desde su celular sin papel.</p>
+            <div class="tech">
+                <span>Firebase</span><span>JavaScript</span>
+                <span>PWA</span><span>Multiusuario</span>
+            </div>
+            <div class="proyecto-features">
+                <p>Dashboard con ventas del día, gastos y ganancia neta</p>
+                <p>Meseros toman pedidos desde celular (hasta 50 mesas)</p>
+                <p>Tickets para impresora térmica y envío por WhatsApp</p>
+                <p>Reportes por fechas exportables a PDF</p>
+            </div>
+            <div class="proyecto-links">
+                <a href="https://restaurante-app-pwa-multiusuario.vercel.app/" target="_blank" class="btn-demo">Ver demo →</a>
             </div>
         </div>
+    </div>
 
-        <div class="proyecto">
-            <div class="proyecto-imagen">
-                <img src="webredesign-preview.png" alt="WebRedesign Services">
+    <!-- 3. CONTABILIDAD PWA -->
+    <div class="proyecto reveal">
+        <div class="proyecto-imagen">
+            <div class="laptop-frame">
+                <div class="laptop-screen">
+                    <img src="contabilidad-preview.png" alt="App Contabilidad PWA">
+                </div>
             </div>
-            <div class="proyecto-info">
-                <h3>🎨 WebRedesign - Servicios de Rediseño</h3>
-                <p>Landing page profesional para servicios de rediseño web con comparador antes/después y métricas de conversión.</p>
-                <div class="tech">
-                    <span>Next.js</span>
-                    <span>React</span>
-                    <span>Tailwind CSS</span>
-                    <span>Framer Motion</span>
-                </div>
-                <div class="proyecto-features">
-                    <p>✅ Comparador interactivo Before/After</p>
-                    <p>✅ Showcase de métricas de conversión</p>
-                    <p>✅ Portfolio de casos de éxito</p>
-                    <p>✅ Formulario de cotización</p>
-                </div>
-                <div class="proyecto-links">
-                    <a href="https://redesign-web-landing-page.vercel.app/" target="_blank" class="btn-demo">🔗 Ver Demo</a>
-                    <a href="https://github.com/zeref0000dragneel-byte/RedesignWeb-landing-page" target="_blank" class="btn-codigo">💻 Código</a>
-                </div>
+            <div class="laptop-base"></div>
+            <div class="laptop-stand"></div>
+        </div>
+        <div class="proyecto-info">
+            <p class="proyecto-tipo">App web</p>
+            <h3>Sistema de Contabilidad — Controla tus finanzas sin internet</h3>
+            <p>App para registrar ventas y gastos de tu negocio. Funciona aunque no tengas señal. Te muestra gráficas claras de cómo va tu dinero cada semana y mes.</p>
+            <div class="tech">
+                <span>JavaScript</span><span>IndexedDB</span>
+                <span>Chart.js</span><span>PWA</span>
+            </div>
+            <div class="proyecto-features">
+                <p>Funciona sin internet, guarda todo en tu dispositivo</p>
+                <p>Registra ventas, gastos y categorías</p>
+                <p>Gráficas para ver el estado de tu negocio rápido</p>
+                <p>Se instala en el celular como app nativa</p>
+            </div>
+            <div class="proyecto-links">
+                <a href="https://contabilidad-app-omega.vercel.app" target="_blank" class="btn-demo">Ver demo →</a>
             </div>
         </div>
+    </div>
 
-        <div class="proyecto">
-            <div class="proyecto-imagen">
-                <img src="flowly-preview.png" alt="Flowly App">
+    <!-- 4. RESTAURANT LANDING -->
+    <div class="proyecto reverse reveal">
+        <div class="proyecto-imagen">
+            <div class="laptop-frame">
+                <div class="laptop-screen">
+                    <img src="restaurant-preview.png" alt="Aurum Fine Dining">
+                </div>
             </div>
-            <div class="proyecto-info">
-                <h3>📱 Flowly - App de Productividad</h3>
-                <p>Landing page moderna con tema oscuro para app móvil de gestión financiera con mockups interactivos y animaciones fluidas.</p>
-                <div class="tech">
-                    <span>Next.js</span>
-                    <span>React</span>
-                    <span>Tailwind CSS</span>
-                    <span>Dark Theme</span>
-                </div>
-                <div class="proyecto-features">
-                    <p>✅ Diseño dark mode moderno</p>
-                    <p>✅ Mockups de móvil 3D interactivos</p>
-                    <p>✅ Animaciones smooth scroll</p>
-                    <p>✅ Sección de testimonios</p>
-                </div>
-                <div class="proyecto-links">
-                    <a href="https://app-mobile-landing-page-eight.vercel.app/" target="_blank" class="btn-demo">🔗 Ver Demo</a>
-                    <a href="https://github.com/zeref0000dragneel-byte/AppMobile-landing-page" target="_blank" class="btn-codigo">💻 Código</a>
-                </div>
+            <div class="laptop-base"></div>
+            <div class="laptop-stand"></div>
+        </div>
+        <div class="proyecto-info">
+            <p class="proyecto-tipo">Página web</p>
+            <h3>Aurum Fine Dining — Página para restaurante</h3>
+            <p>Página elegante para restaurante gourmet. Los clientes pueden ver el menú, la galería y hacer reservaciones directamente desde su celular o computadora.</p>
+            <div class="tech">
+                <span>Next.js</span><span>React</span>
+                <span>Tailwind CSS</span><span>Framer Motion</span>
+            </div>
+            <div class="proyecto-features">
+                <p>Diseño atractivo con animaciones profesionales</p>
+                <p>Sistema de reservas integrado</p>
+                <p>Galería de platillos interactiva</p>
+                <p>Aparece en Google (SEO optimizado)</p>
+            </div>
+            <div class="proyecto-links">
+                <a href="https://restaurant-landing-page-neon-xi.vercel.app/" target="_blank" class="btn-demo">Ver demo →</a>
             </div>
         </div>
+    </div>
+</section>
 
-        <div class="proyecto">
-            <div class="proyecto-imagen">
-                <img src="saasflow-preview.png" alt="SaasFlow Platform">
-            </div>
-            <div class="proyecto-info">
-                <h3>💼 SaasFlow - Plataforma Enterprise B2B</h3>
-                <p>Landing page enterprise para plataforma SaaS B2B con tablas de pricing, testimonials corporativos y secciones CTA estratégicas.</p>
-                <div class="tech">
-                    <span>Next.js</span>
-                    <span>React</span>
-                    <span>Tailwind CSS</span>
-                    <span>B2B</span>
-                </div>
-                <div class="proyecto-features">
-                    <p>✅ Pricing tables comparativas</p>
-                    <p>✅ Testimonios de empresas reales</p>
-                    <p>✅ CTAs estratégicos de conversión</p>
-                    <p>✅ Integración con IA destacada</p>
-                </div>
-                <div class="proyecto-links">
-                    <a href="https://enterprice-landing-page.vercel.app/" target="_blank" class="btn-demo">🔗 Ver Demo</a>
-                    <a href="https://github.com/zeref0000dragneel-byte/Enterprice-landing-page" target="_blank" class="btn-codigo">💻 Código</a>
-                </div>
-            </div>
-        </div>
-        
-    </section>
-
-    <section class="servicios">
-        <h2>🚀 ¿Qué Puedo Hacer Por Ti?</h2>
+<!-- SERVICIOS -->
+<section id="servicios" class="servicios">
+    <div class="servicios-inner">
+        <span class="section-eyebrow">Lo que ofrezco</span>
+        <h2 class="section-title">¿Qué necesita<br>tu negocio?</h2>
         <div class="servicios-grid">
             <div class="servicio">
-                <div class="servicio-icon">🌐</div>
-                <h3>Landing Pages</h3>
-                <p>Páginas de aterrizaje profesionales y optimizadas para convertir visitantes en clientes</p>
+                <span class="servicio-icon">🌐</span>
+                <h3>Página web</h3>
+                <p>Para que tus clientes te encuentren en Google, vean tus servicios y te contacten fácilmente desde su celular.</p>
+                <span class="servicio-precio"><span class="desde">desde </span>$3,500 MXN</span>
+                <span class="servicio-tiempo">⏱ Entrega en 7 días</span>
             </div>
             <div class="servicio">
-                <div class="servicio-icon">🛍️</div>
-                <h3>E-commerce</h3>
-                <p>Tiendas online completas con carrito, pasarela de pagos y panel de administración</p>
+                <span class="servicio-icon">🛍️</span>
+                <h3>Tienda online</h3>
+                <p>Vende tus productos las 24 horas, acepta pagos con tarjeta, OXXO o transferencia y gestiona todo desde un panel.</p>
+                <span class="servicio-precio"><span class="desde">desde </span>$5,500 MXN</span>
+                <span class="servicio-tiempo">⏱ Entrega en 14 días</span>
             </div>
             <div class="servicio">
-                <div class="servicio-icon">📱</div>
-                <h3>Web Apps</h3>
-                <p>Aplicaciones web modernas y reactivas adaptadas a tus necesidades</p>
+                <span class="servicio-icon">⚙️</span>
+                <h3>Sistema a medida</h3>
+                <p>Control de pedidos, inventario, empleados o contabilidad. Un sistema hecho exactamente para cómo funciona tu negocio.</p>
+                <span class="servicio-precio"><span class="desde">desde </span>$6,000 MXN</span>
+                <span class="servicio-tiempo">⏱ Entrega en 14–21 días</span>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="contacto">
-        <h2>📬 Trabajemos Juntos</h2>
-        <p>¿Tienes un proyecto en mente? Contáctame y lo hacemos realidad</p>
-        <div class="contacto-links">
-            <a href="mailto:cuevasgutierrezjosegabriel@gmail.com" class="contacto-btn">✉️ Email</a>
-            <a href="https://github.com/zeref0000dragneel-byte" target="_blank" class="contacto-btn">💻 GitHub</a>
-            <a href="https://www.fiverr.com/s/42yzvGx" target="_blank" class="contacto-btn">💼 Fiverr</a>
-            <a href="https://www.workana.com/freelancer/8942d8873f78673dc0e13e970df266e1" target="_blank" class="contacto-btn">🌎 Workana</a>
+<!-- PROCESO -->
+<section id="proceso" class="proceso">
+    <span class="section-eyebrow reveal">Cómo trabajo</span>
+    <h2 class="section-title reveal">Simple y sin sorpresas</h2>
+    <div class="proceso-grid reveal">
+        <div class="paso">
+            <span class="paso-num">01</span>
+            <h4>Platicamos</h4>
+            <p>Me cuentas qué necesitas. Te doy un presupuesto claro en menos de 24 horas, sin compromiso.</p>
         </div>
-    </section>
+        <div class="paso">
+            <span class="paso-num">02</span>
+            <h4>Diseño y apruebas</h4>
+            <p>Te muestro cómo va a quedar antes de desarrollar. Haces cambios hasta que estés contento.</p>
+        </div>
+        <div class="paso">
+            <span class="paso-num">03</span>
+            <h4>Desarrollo</h4>
+            <p>Construyo tu proyecto con tecnología moderna. Te mando avances cada 2–3 días.</p>
+        </div>
+        <div class="paso">
+            <span class="paso-num">04</span>
+            <h4>Entrego y te apoyo</h4>
+            <p>Tu proyecto queda en línea. Te enseño a usarlo y estoy disponible si necesitas algo.</p>
+        </div>
+    </div>
+</section>
 
-    <footer>
-        <p>© 2026 José  - Desarrollador Web Full Stack</p>
-        <p>Hecho con ❤️ usando HTML, CSS y JavaScript</p>
-    </footer>
-</body>
-</html>
+<!-- CONTACTO -->
+<section id="contacto" class="contacto">
+    <div class="contacto-inner">
+        <div class="contacto-left reveal">
+            <h2>¿Listo para empezar?</h2>
+            <p>Cuéntame qué necesita tu negocio. Te respondo en menos de 24 horas con un presupuesto claro y sin rodeos.</p>
+        </div>
+        <div class="contacto-links reveal">
+            <a href="https://wa.me/529516394080?text=Hola%20Gabriel%2C%20vi%20tu%20portafolio%20y%20quisiera%20platicar%20sobre%20mi%20proyecto" target="_blank" class="contacto-link">
+                <span class="contacto-link-icon">💬</span>
+                <div>
+                    <p class="contacto-link-texto">WhatsApp — Respuesta rápida</p>
+                    <p class="contacto-link-sub">+52 951 639 4080</p>
+                </div>
+            </a>
+            <a href="mailto:cuevasgutierrezjosegabriel@gmail.com" class="contacto-link">
+                <span class="contacto-link-icon">✉️</span>
+                <div>
+                    <p class="contacto-link-texto">Correo electrónico</p>
+                    <p class="contacto-link-sub"><span class="__cf_email__" data-cfemail="d4b7a1b1a2b5a7b3a1a0bdb1a6a6b1aebebba7b1b3b5b6a6bdb1b894b3b9b5bdb8fab7bbb9">email&#160;cuevasgutierrezjosegabriel@gmail.com</span></p>
+                </div>
+            </a>
+            <a href="https://www.workana.com/freelancer/8942d8873f78673dc0e13e970df266e1" target="_blank" class="contacto-link">
+                <span class="contacto-link-icon">🌎</span>
+                <div>
+                    <p class="contacto-link-texto">Workana</p>
+                    <p class="contacto-link-sub">Disponible para proyectos freelance</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 José Gabriel Cuevas · Oaxaca, México</p>
+    <div class="footer-links">
+        <a href="https://github.com/zeref0000dragneel-byte" target="_blank">GitHub</a>
+        <a href="https://www.fiverr.com/s/42yzvGx" target="_blank">Fiverr</a>
+    </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Activar animaciones solo si JS funciona
+    document.documentElement.classList.add('js-loaded');
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('visible'), i * 80);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Nav sombra al scrollear
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+        nav.style.boxShadow = window.scrollY > 10
+            ? '0 2px 24px rgba(0,0,0,0.07)'
+            : 'none';
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEac
